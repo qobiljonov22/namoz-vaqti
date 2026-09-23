@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/build.mjs --zip",
+    "build": "node scripts/build.mjs",
     "build:html": "node scripts/build.mjs",
     "build:zip": "node scripts/build.mjs --zip"
   }

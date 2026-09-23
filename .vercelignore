@@ -1,0 +1,13 @@
+# WordPress / local — Vercelga kerak emas
+api/
+*.php
+inc/
+includes/
+cache/
+.osp/
+dist/
+netlify-dist/
+scripts/
+build.bat
+build.ps1
+BUILD.md
