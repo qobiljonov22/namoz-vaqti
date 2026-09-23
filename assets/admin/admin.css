@@ -1,0 +1,142 @@
+.ramazon-admin-wrap {
+  max-width: 1200px;
+}
+
+.ramazon-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 16px 0 20px;
+  padding: 14px;
+  background: #fff;
+  border: 1px solid #c3c4c7;
+  border-radius: 4px;
+}
+
+.ramazon-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.ramazon-filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 600;
+}
+
+.ramazon-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #dba617;
+  color: #1d2327;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.ramazon-actions a {
+  text-decoration: none;
+}
+
+.ramazon-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s ease;
+  z-index: 100000;
+}
+
+.ramazon-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ramazon-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(420px, 100%);
+  height: 100%;
+  background: #fff;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.15);
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  z-index: 100001;
+  overflow-y: auto;
+  padding: 0 0 40px;
+}
+
+.ramazon-sidebar.is-open {
+  transform: translateX(0);
+}
+
+.ramazon-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #dcdcde;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 2;
+}
+
+.ramazon-sidebar-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.ramazon-sidebar-close {
+  border: 0;
+  background: transparent;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  color: #50575e;
+}
+
+.ramazon-sidebar-form {
+  padding: 16px 20px;
+}
+
+.ramazon-sidebar-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.ramazon-sidebar-form input[type="text"],
+.ramazon-sidebar-form input[type="number"],
+.ramazon-sidebar-form input[type="date"],
+.ramazon-sidebar-form select,
+.ramazon-sidebar-form textarea {
+  width: 100%;
+  max-width: 100%;
+}
+
+.ramazon-time-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.ramazon-sidebar-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+@media (max-width: 782px) {
+  .ramazon-time-grid {
+    grid-template-columns: 1fr;
+  }
+}

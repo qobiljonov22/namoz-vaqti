@@ -1,0 +1,6 @@
+cache/*
+!cache/.gitkeep
+.osp/
+*.log
+.DS_Store
+Thumbs.db
