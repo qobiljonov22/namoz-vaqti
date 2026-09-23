@@ -77,14 +77,22 @@
 
     try {
       const data = await Aladhan.ramadanCalendar(cityId, year);
+      const map =
+        window.AdminStore && typeof AdminStore.getMergedOverrides === "function"
+          ? await AdminStore.getMergedOverrides()
+          : {};
+      const days =
+        window.AdminStore && typeof AdminStore.applyOverrides === "function"
+          ? AdminStore.applyOverrides(data.days, year, cityId, map)
+          : data.days;
       hijriLabel.textContent = `Aladhan API · ${data.hijri_year} AH`;
       sourceLink.href = data.link;
       sourceLink.textContent = `aladhan.com/ramadan-calendar/${data.year}`;
-      meta.innerHTML = `<span class="text-sand">${escapeHtml(data.city.name)}</span> · ${data.days.length} kun`;
+      meta.innerHTML = `<span class="text-sand">${escapeHtml(data.city.name)}</span> · ${days.length} kun`;
       const featured =
-        data.days.find((d) => d.gregorian_iso === todayIso()) || data.days[0];
+        days.find((d) => d.gregorian_iso === todayIso()) || days[0];
       renderHero(featured, data.city.name);
-      renderRows(data.days);
+      renderRows(days);
       document.title = `Ramazon Taqvim ${data.year}`;
     } catch (err) {
       meta.textContent = "Xatolik";

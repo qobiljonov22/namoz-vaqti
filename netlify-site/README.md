@@ -1,19 +1,21 @@
-# Netlify deploy (static)
+# Netlify / Vercel (static)
 
-Bu papka **Netlify** uchun tayyor static sayt.
+Bu papka **Netlify** va **Vercel** uchun static sayt.
 
 ## Deploy
-1. `namoz-vaqti-netlify.zip` ni Netlifyga yuklang
-   yoki shu `netlify-site` papkasini drag & drop qiling
-2. Build command: kerak emas (yoki `echo ready`)
-3. Publish directory: `.` (zip ichidagi root)
+- **Netlify:** `netlify-site` papkasini yoki `namoz-vaqti-netlify.zip` ni yuklang
+- **Vercel:** Root Directory = `netlify-site` (yoki shu papkani import)
 
 ## Sahifalar
-- `/` yoki `index.html` — Ramazon Taqvim
+- `/` — Ramazon Taqvim
 - `/namoz.html` — Namoz vaqti
+- `/admin.html` yoki `/wp-admin` — Admin panel (static)
 
-## WordPress
-WordPress OpenServerda alohida ishlaydi:
-`http://ramazon-taqvim.local`
+## Admin
+Login: `admin` / `admin123`
 
-Netlify PHP/WordPressni ishga tushirmaydi — shuning uchun static + Aladhan API (brauzerdan).
+WordPress (`wp-admin`) Netlify/Vercelda **ishlamaydi** (PHP/MySQL yo‘q).
+Shu sabab `/wp-admin` → static `/admin.html` ga yo‘naltiriladi.
+
+Local WordPress alohida:
+`http://ramazon-taqvim.local/wp-admin`

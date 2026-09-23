@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "buildCommand": null,
+  "outputDirectory": "netlify-site",
+  "rewrites": [
+    { "source": "/namoz", "destination": "/namoz.html" },
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/wp-admin", "destination": "/admin.html" },
+    { "source": "/wp-admin/:path*", "destination": "/admin.html" },
+    { "source": "/wp-login.php", "destination": "/admin.html" }
+  ]
+}

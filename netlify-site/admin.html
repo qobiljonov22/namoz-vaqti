@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin — Ramazon Taqvim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            night: '#07140f',
+            moss: '#0f2a1f',
+            sage: '#1f4d3a',
+            gold: '#c9a227',
+            sand: '#e8dcc4',
+            mist: '#9fb8a8'
+          },
+          fontFamily: {
+            display: ['Amiri', 'serif'],
+            sans: ['Manrope', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201, 162, 39, 0.18), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 90% 20%, rgba(31, 77, 58, 0.45), transparent 50%),
+        linear-gradient(180deg, #07140f 0%, #0a1c14 45%, #06110d 100%);
+      min-height: 100vh;
+    }
+  </style>
+</head>
+<body class="text-sand font-sans antialiased">
+  <main class="relative z-10 mx-auto max-w-6xl px-4 py-10 md:py-14">
+    <nav class="mb-8 flex flex-wrap items-center justify-center gap-4 text-sm text-mist">
+      <a href="/" class="hover:text-gold transition">Ramazon Taqvim</a>
+      <span class="opacity-40">·</span>
+      <a href="/namoz.html" class="hover:text-gold transition">Namoz vaqti</a>
+      <span class="opacity-40">·</span>
+      <span class="text-gold">Admin</span>
+    </nav>
+
+    <!-- Login -->
+    <section id="login-panel" class="mx-auto hidden max-w-md rounded-2xl border border-sage/40 bg-moss/50 p-6 backdrop-blur-sm">
+      <h1 class="font-display text-3xl text-sand">Admin kirish</h1>
+      <p class="mt-2 text-sm text-mist">Netlify · Vercel · local — WordPresssiz panel</p>
+      <form id="login-form" class="mt-6 space-y-4">
+        <div>
+          <label for="login-user" class="mb-2 block text-sm text-mist">Login</label>
+          <input id="login-user" type="text" autocomplete="username" value="admin"
+            class="w-full rounded-xl border border-sage/50 bg-night/80 px-4 py-3 text-sand outline-none ring-gold/40 focus:ring-2">
+        </div>
+        <div>
+          <label for="login-pass" class="mb-2 block text-sm text-mist">Parol</label>
+          <input id="login-pass" type="password" autocomplete="current-password"
+            class="w-full rounded-xl border border-sage/50 bg-night/80 px-4 py-3 text-sand outline-none ring-gold/40 focus:ring-2">
+        </div>
+        <p id="login-error" class="hidden text-sm text-red-300">Login yoki parol noto‘g‘ri.</p>
+        <button type="submit" class="w-full rounded-xl bg-gold px-4 py-3 font-semibold text-night transition hover:bg-sand">
+          Kirish
+        </button>
+      </form>
+      <p class="mt-4 text-center text-xs text-mist/70">Default: admin / admin123</p>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="dash-panel" class="hidden space-y-6">
+      <header class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h1 class="font-display text-4xl text-sand">Ramazon <span class="text-gold">Admin</span></h1>
+          <p class="mt-2 text-sm text-mist">Kunlarni tahrirlash · Aladhan + override</p>
+        </div>
+        <button id="logout-btn" type="button" class="rounded-xl border border-sage/50 px-4 py-2 text-sm text-mist hover:border-gold hover:text-gold">
+          Chiqish
+        </button>
+      </header>
+
+      <div class="flex flex-col gap-4 rounded-2xl border border-sage/40 bg-moss/50 p-4 md:flex-row md:items-end md:p-6">
+        <div class="grid flex-1 gap-4 sm:grid-cols-2">
+          <div>
+            <label for="admin-year" class="mb-2 block text-sm text-mist">Yil</label>
+            <select id="admin-year" class="w-full appearance-none rounded-xl border border-sage/50 bg-night/80 px-4 py-3 text-sand outline-none ring-gold/40 focus:ring-2">
+              <option value="2027" selected>2027 (1448 AH)</option>
+              <option value="2028">2028 (1449 AH)</option>
+            </select>
+          </div>
+          <div>
+            <label for="admin-city" class="mb-2 block text-sm text-mist">Shahar</label>
+            <select id="admin-city" class="w-full appearance-none rounded-xl border border-sage/50 bg-night/80 px-4 py-3 text-sand outline-none ring-gold/40 focus:ring-2"></select>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button id="reload-btn" type="button" class="rounded-xl border border-sage/50 px-4 py-3 text-sm hover:border-gold hover:text-gold">Yangilash</button>
+          <button id="export-btn" type="button" class="rounded-xl bg-gold px-4 py-3 text-sm font-semibold text-night hover:bg-sand">JSON export</button>
+        </div>
+      </div>
+
+      <p id="admin-meta" class="text-sm text-mist">Yuklanmoqda…</p>
+
+      <div class="overflow-hidden rounded-2xl border border-sage/40 bg-moss/40">
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[900px] text-left text-sm">
+            <thead class="bg-night/60 text-mist">
+              <tr>
+                <th class="px-3 py-3 font-medium">Kun</th>
+                <th class="px-3 py-3 font-medium">Sana</th>
+                <th class="px-3 py-3 font-medium text-gold">Saharlik</th>
+                <th class="px-3 py-3 font-medium">Bomdod</th>
+                <th class="px-3 py-3 font-medium text-gold">Iftor</th>
+                <th class="px-3 py-3 font-medium">Xufton</th>
+                <th class="px-3 py-3 font-medium">Amal</th>
+              </tr>
+            </thead>
+            <tbody id="admin-body" class="divide-y divide-sage/25"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Edit modal -->
+    <div id="edit-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-night/80 p-4 backdrop-blur-sm">
+      <form id="edit-form" class="w-full max-w-md rounded-2xl border border-sage/40 bg-moss p-6 shadow-xl">
+        <h2 class="font-display text-2xl text-gold">Kunni tahrirlash</h2>
+        <p id="edit-label" class="mt-1 text-sm text-mist"></p>
+        <input type="hidden" id="edit-iso">
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          <div>
+            <label class="mb-1 block text-xs text-mist">Saharlik</label>
+            <input id="edit-imsak" class="w-full rounded-lg border border-sage/50 bg-night/80 px-3 py-2 text-sand outline-none focus:ring-2 focus:ring-gold/40" required>
+          </div>
+          <div>
+            <label class="mb-1 block text-xs text-mist">Bomdod</label>
+            <input id="edit-fajr" class="w-full rounded-lg border border-sage/50 bg-night/80 px-3 py-2 text-sand outline-none focus:ring-2 focus:ring-gold/40" required>
+          </div>
+          <div>
+            <label class="mb-1 block text-xs text-mist">Iftor</label>
+            <input id="edit-maghrib" class="w-full rounded-lg border border-sage/50 bg-night/80 px-3 py-2 text-sand outline-none focus:ring-2 focus:ring-gold/40" required>
+          </div>
+          <div>
+            <label class="mb-1 block text-xs text-mist">Xufton</label>
+            <input id="edit-isha" class="w-full rounded-lg border border-sage/50 bg-night/80 px-3 py-2 text-sand outline-none focus:ring-2 focus:ring-gold/40" required>
+          </div>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button type="submit" class="flex-1 rounded-xl bg-gold py-2.5 font-semibold text-night">Saqlash</button>
+          <button type="button" id="edit-cancel" class="flex-1 rounded-xl border border-sage/50 py-2.5 text-mist">Bekor</button>
+        </div>
+        <button type="button" id="edit-reset" class="mt-3 w-full text-xs text-mist/80 underline hover:text-gold">Override o‘chirish</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="/assets/aladhan.js"></script>
+  <script src="/assets/admin-store.js"></script>
+  <script src="/assets/admin.js"></script>
+</body>
+</html>
