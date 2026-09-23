@@ -1,0 +1,19 @@
+[build]
+  publish = "."
+  command = "echo Netlify static site ready"
+
+[[redirects]]
+  from = "/namoz"
+  to = "/namoz.html"
+  status = 200
+
+[[redirects]]
+  from = "/ramazon"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"

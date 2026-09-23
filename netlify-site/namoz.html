@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Namoz vaqti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            night: '#07140f',
+            moss: '#0f2a1f',
+            sage: '#1f4d3a',
+            gold: '#c9a227',
+            sand: '#e8dcc4',
+            mist: '#9fb8a8'
+          },
+          fontFamily: {
+            display: ['Amiri', 'serif'],
+            sans: ['Manrope', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201, 162, 39, 0.18), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 90% 20%, rgba(31, 77, 58, 0.45), transparent 50%),
+        linear-gradient(180deg, #07140f 0%, #0a1c14 45%, #06110d 100%);
+      min-height: 100vh;
+    }
+    .row-today { outline: 1px solid rgba(201,162,39,0.45); outline-offset: -1px; }
+  </style>
+</head>
+<body class="text-sand font-sans antialiased">
+  <main class="relative z-10 mx-auto max-w-6xl px-4 py-10 md:py-14">
+    <nav class="mb-8 flex flex-wrap items-center justify-center gap-4 text-sm text-mist">
+      <a href="/" class="hover:text-gold transition">Ramazon Taqvim</a>
+      <span class="opacity-40">·</span>
+      <span class="text-gold">Namoz vaqti</span>
+    </nav>
+
+    <header class="mb-10 text-center md:mb-12">
+      <p class="mb-3 text-sm tracking-[0.25em] text-mist uppercase">api.aladhan.com · calendar</p>
+      <h1 class="font-display text-4xl leading-tight text-sand md:text-6xl">
+        Namoz <span class="text-gold">vaqti</span>
+      </h1>
+      <p class="mx-auto mt-4 max-w-xl text-mist">
+        Oylik namoz jadvali — Aladhan Prayer Times Calendar
+      </p>
+    </header>
+
+    <section class="mb-8 flex flex-col items-stretch gap-4 rounded-2xl border border-sage/40 bg-moss/50 p-4 backdrop-blur-sm md:flex-row md:items-end md:justify-between md:p-6">
+      <div class="grid flex-1 gap-4 sm:grid-cols-3">
+        <div>
+          <label for="namoz-city" class="mb-2 block text-sm text-mist">Shahar</label>
+          <select id="namoz-city" class="w-full appearance-none rounded-xl border border-sage/50 bg-night/80 px-4 py-3 text-sand outline-none ring-gold/40 transition focus:ring-2"></select>
+        </div>
+        <div>
+          <label for="namoz-year" class="mb-2 block text-sm text-mist">Yil</label>
+          <select id="namoz-year" class="w-full appearance-none rounded-xl border border-sage/50 bg-night/80 px-4 py-3 text-sand outline-none ring-gold/40 transition focus:ring-2"></select>
+        </div>
+        <div>
+          <label for="namoz-month" class="mb-2 block text-sm text-mist">Oy</label>
+          <select id="namoz-month" class="w-full appearance-none rounded-xl border border-sage/50 bg-night/80 px-4 py-3 text-sand outline-none ring-gold/40 transition focus:ring-2"></select>
+        </div>
+      </div>
+      <div id="namoz-meta" class="text-sm text-mist md:text-right">Yuklanmoqda…</div>
+    </section>
+
+    <section id="namoz-today" class="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"></section>
+
+    <section class="overflow-hidden rounded-2xl border border-sage/40 bg-moss/40 backdrop-blur-sm">
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[860px] text-left text-sm">
+          <thead class="bg-night/60 text-mist">
+            <tr>
+              <th class="px-3 py-3 font-medium">Sana</th>
+              <th class="px-3 py-3 font-medium">Hafta</th>
+              <th class="px-3 py-3 font-medium text-gold">Bomdod</th>
+              <th class="px-3 py-3 font-medium">Quyosh</th>
+              <th class="px-3 py-3 font-medium">Peshin</th>
+              <th class="px-3 py-3 font-medium">Asr</th>
+              <th class="px-3 py-3 font-medium text-gold">Shom</th>
+              <th class="px-3 py-3 font-medium">Xufton</th>
+            </tr>
+          </thead>
+          <tbody id="namoz-body" class="divide-y divide-sage/25">
+            <tr>
+              <td colspan="8" class="px-4 py-10 text-center text-mist">Namoz vaqtlari yuklanmoqda…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="mt-6 text-center text-xs text-mist/70">
+      Manba:
+      <a id="namoz-source" class="underline decoration-gold/50 hover:text-gold" href="https://aladhan.com/calendar/Tashkent/Uzbekistan" target="_blank" rel="noopener">aladhan.com/calendar/Tashkent/Uzbekistan</a>
+      · Tailwind CSS
+    </p>
+  </main>
+
+  <script src="/assets/aladhan.js"></script>
+  <script src="/assets/namoz.js"></script>
+</body>
+</html>
